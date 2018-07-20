@@ -12,7 +12,7 @@ int main() {
     map.add_unit(1,2,3);
     map.listAllUnits();
     map.print();
-    map.add_unit(2,2,3);
+    map.add_unit(2,2,3); //replace unit (buggy but user doesn't add units manually. cannot occur ingame if level is createtd properly)
     map.listAllUnits();
     map.print();
     map.get_unit(2,3)->move(5,6);
