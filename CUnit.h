@@ -11,7 +11,7 @@
 class CMap;
 
 class CUnit {
-private:
+protected:
     CMap* map;
     int type;
     int health;

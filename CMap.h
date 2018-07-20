@@ -17,17 +17,24 @@ class CMap {
 private:
     std::vector<std::vector<int>> grid;
     std::unordered_map<int,CUnit*> unit_list;
+    std::unordered_map<int,CUnit*> enemy_list;
     unsigned int unitCounter;
+    unsigned int enemyCounter;
+
+    //helper funktions:
+    void set(int x, int y, int id);
 
 public:
     CMap();
-    void set(int x, int y, int id);
     int get(int x, int y);
     CUnit* get_unit(int x, int y);
     CUnit* get_unit(int id);
     void add_unit(int type, int x, int y);
     bool kill_unit(int id);
     bool move(int x, int y, int to_x, int to_y);
+    int distance(int x, int y, int to_x, int to_y);
+    std::unordered_map<int,CUnit*>* get_enemys_list();
+    std::unordered_map<int,CUnit*>* get_unit_list();
     void print();
     void listAllUnits();
 };
