@@ -10,7 +10,7 @@ class CUnit {
 private:
     int type;
     int health;
-    int x;
+    int x; //todo: necessary? 
     int y;
 public:
     CUnit(int typ, int x, int y);
