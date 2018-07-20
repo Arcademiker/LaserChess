@@ -15,5 +15,8 @@ int main() {
     map.add_unit(2,2,3);
     map.listAllUnits();
     map.print();
+    map.get_unit(2,3)->move(5,6);
+    map.print();
+    map.listAllUnits();
     return 0;
 }
