@@ -3,5 +3,5 @@ project(LaserChess)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp CMap.cpp CMap.h CUnit.cpp CUnit.h CUnit_AI.cpp CUnit_AI.h)
+set(SOURCE_FILES main.cpp CMap.cpp CMap.h CUnit.cpp CUnit.h CUnit_AI.cpp CUnit_AI.h CDreadnought.cpp CDreadnought.h)
 add_executable(LaserChess ${SOURCE_FILES})

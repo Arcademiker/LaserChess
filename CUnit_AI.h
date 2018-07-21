@@ -10,10 +10,11 @@
 
 class CUnit_AI : public CUnit {
 private:
-    //todo sourounding
+
 public:
     CUnit_AI(int typ, int x, int y, CMap &map);
-    void get_nearest();
+    //void get_nearest();
+    //todo: AImove
 };
 
 
