@@ -25,7 +25,7 @@ CMap::CMap() {
     this->grid = std::vector<std::vector<int>>(size,std::vector<int>(size,0));
 }
 
-/// get unit id that occupated filed at position (x,y) or 0 if free
+/// get unit id that occupated field at position (x,y) or 0 if free
 int CMap::get(int x, int y) {
     return this->grid[y][x];
 }

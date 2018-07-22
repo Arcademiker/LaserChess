@@ -4,19 +4,22 @@
 int main() {
     CMap map;
     map.add_unit(1,2,3);
-    map.add_unit(5,4,3);
+    map.add_unit(2,4,2);
     map.print();
-    map.kill_unit(1);
+    map.kill_unit(2);
     map.print();
     map.listAllUnits();
-    map.add_unit(1,2,3);
+    map.add_unit(4,2,6);
     map.add_unit(1,0,3);
     map.listAllUnits();
     map.print();
-    map.add_unit(5,2,3); // replace unit bug
+    map.add_unit(5,3,3); // replace unit bug
     map.listAllUnits();
     map.print();
     map.get_unit(2,3)->move(5,6);
+    map.print();
+    map.listAllUnits();
+    map.get_unit(2,6)->do_turn();
     map.print();
     map.listAllUnits();
     return 0;
