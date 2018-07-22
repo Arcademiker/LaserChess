@@ -14,7 +14,7 @@ private:
 public:
     CUnit_AI(int typ, int x, int y, CMap &map);
     //void get_nearest();
-    void do_turn() override;
+    //void do_turn() override;
 };
 
 

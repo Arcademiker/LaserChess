@@ -10,7 +10,3 @@ CUnit_AI::CUnit_AI(int typ, int x, int y, CMap &map) : CUnit(typ, x, y, map) {
 
 }
 
-void CUnit_AI::do_turn() {
-
-}
-

@@ -5,7 +5,12 @@
 #include "CMap.h"
 #include "CUnit_AI.h"
 #include "CUnit_Player.h"
-#include "CDreadnought.h"
+#include "Units/CGrunt.h"
+#include "Units/CJumpship.h"
+#include "Units/CTank.h"
+#include "Units/CDrone.h"
+#include "Units/CDreadnought.h"
+#include "Units/CCommandUnit.h"
 
 
 
@@ -44,27 +49,28 @@ CUnit* CMap::get_unit(int id) {
     }
 }
 
-/// attention: replaces unit if space is occupied
+/// warning: replaces unit if space is occupied
+/// buggy but user doesn't add units manually. cannot occur ingame if level is createtd properly
 void CMap::add_unit(int type, int x, int y) {
     switch(type) {
         case 1 :
             this->unitCounter++;
-            this->unit_list.insert({ this->unitCounter, new CUnit_Player(type, x, y, *this)});
+            this->unit_list.insert({ this->unitCounter, new CGrunt(type, x, y, *this)});
             this->grid[y][x] = unitCounter;
             break;
         case 2 :
             this->unitCounter++;
-            this->unit_list.insert({ this->unitCounter, new CUnit_Player(type, x, y, *this)});
+            this->unit_list.insert({ this->unitCounter, new CJumpship(type, x, y, *this)});
             this->grid[y][x] = unitCounter;
             break;
         case 3 :
             this->unitCounter++;
-            this->unit_list.insert({ this->unitCounter, new CUnit_Player(type, x, y, *this)});
+            this->unit_list.insert({ this->unitCounter, new CTank(type, x, y, *this)});
             this->grid[y][x] = unitCounter;
             break;
         case 4:
             this->enemyCounter++;
-            this->enemy_list.insert({ -this->enemyCounter, new CUnit_AI(type, x, y, *this)});
+            this->enemy_list.insert({ -this->enemyCounter, new CDrone(type, x, y, *this)});
             this->grid[y][x] = -enemyCounter;
             break;
         case 5:
@@ -74,7 +80,7 @@ void CMap::add_unit(int type, int x, int y) {
             break;
         case 6:
             this->enemyCounter++;
-            this->enemy_list.insert({ -this->enemyCounter, new CUnit_AI(type, x, y, *this)});
+            this->enemy_list.insert({ -this->enemyCounter, new CCommandUnit(type, x, y, *this)});
             this->grid[y][x] = -enemyCounter;
             break;
         default:

@@ -10,7 +10,7 @@
 class CUnit_Player : public CUnit{
 public:
     CUnit_Player(int typ, int x, int y, CMap &map);
-    void do_turn() override; //todo: pure virtual
+    //void do_turn() override; /// pure virtual
 };
 
 

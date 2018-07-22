@@ -14,8 +14,13 @@ CDreadnought::CDreadnought(int typ, int x, int y, CMap &map) : CUnit_AI(typ, x, 
 
 }
 
+void CDreadnought::do_turn() {
+
+}
+
 
 void CDreadnought::get_nearest() {
     //todo: get nearest surrounding
 }
+
 

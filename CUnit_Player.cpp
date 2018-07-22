@@ -8,6 +8,4 @@ CUnit_Player::CUnit_Player(int typ, int x, int y, CMap &map) : CUnit(typ, x, y, 
 
 }
 
-void CUnit_Player::do_turn() {
 
-}

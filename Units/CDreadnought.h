@@ -7,7 +7,7 @@
 
 #include <map>
 
-#include "CUnit_AI.h"
+#include "../CUnit_AI.h"
 
 
 class CDreadnought : public CUnit_AI {
@@ -18,6 +18,7 @@ private:
 
 public:
     CDreadnought(int typ, int x, int y, CMap &map);
+    void do_turn() override;
     void get_nearest();
 };
 
