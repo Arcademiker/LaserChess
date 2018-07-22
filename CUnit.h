@@ -23,6 +23,7 @@ public:
     int get_x();
     int get_y();
     bool move(int to_x, int to_y);
+    virtual void do_turn() = 0;
 };
 
 

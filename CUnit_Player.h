@@ -1,0 +1,17 @@
+//
+// Created by arcademiker on 22.07.18.
+//
+
+#ifndef LASERCHESS_CUNIT_PLAYER_H
+#define LASERCHESS_CUNIT_PLAYER_H
+
+#include "CUnit.h"
+
+class CUnit_Player : public CUnit{
+public:
+    CUnit_Player(int typ, int x, int y, CMap &map);
+    void do_turn() override; //todo: pure virtual
+};
+
+
+#endif //LASERCHESS_CUNIT_PLAYER_H

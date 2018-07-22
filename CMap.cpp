@@ -3,6 +3,9 @@
 //
 
 #include "CMap.h"
+#include "CUnit_AI.h"
+#include "CUnit_Player.h"
+#include "CDreadnought.h"
 
 
 
@@ -43,17 +46,40 @@ CUnit* CMap::get_unit(int id) {
 
 /// attention: replaces unit if space is occupied
 void CMap::add_unit(int type, int x, int y) {
-    if(type < 4) {
-        this->unitCounter++;
-        //CUnit* unit = new CUnit(type, x, y, *this);
-        this->unit_list.insert({ this->unitCounter, new CUnit(type, x, y, *this)});
-        this->grid[y][x] = unitCounter;
-    }
-    else {
-        this->enemyCounter++;
-        //CUnit* unit = new CUnit(type, x, y, *this);
-        this->enemy_list.insert({ -this->enemyCounter, new CUnit(type, x, y, *this)});
-        this->grid[y][x] = -enemyCounter;
+    switch(type) {
+        case 1 :
+            this->unitCounter++;
+            this->unit_list.insert({ this->unitCounter, new CUnit_Player(type, x, y, *this)});
+            this->grid[y][x] = unitCounter;
+            break;
+        case 2 :
+            this->unitCounter++;
+            this->unit_list.insert({ this->unitCounter, new CUnit_Player(type, x, y, *this)});
+            this->grid[y][x] = unitCounter;
+            break;
+        case 3 :
+            this->unitCounter++;
+            this->unit_list.insert({ this->unitCounter, new CUnit_Player(type, x, y, *this)});
+            this->grid[y][x] = unitCounter;
+            break;
+        case 4:
+            this->enemyCounter++;
+            this->enemy_list.insert({ -this->enemyCounter, new CUnit_AI(type, x, y, *this)});
+            this->grid[y][x] = -enemyCounter;
+            break;
+        case 5:
+            this->enemyCounter++;
+            this->enemy_list.insert({ -this->enemyCounter, new CDreadnought(type, x, y, *this)});
+            this->grid[y][x] = -enemyCounter;
+            break;
+        case 6:
+            this->enemyCounter++;
+            this->enemy_list.insert({ -this->enemyCounter, new CUnit_AI(type, x, y, *this)});
+            this->grid[y][x] = -enemyCounter;
+            break;
+        default:
+            //todo: throw exception
+            break;
     }
 }
 

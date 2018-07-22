@@ -7,9 +7,10 @@
 
 
 CUnit_AI::CUnit_AI(int typ, int x, int y, CMap &map) : CUnit(typ, x, y, map) {
-    this->type = type;
-    this-> x = x;
-    this-> y = y;
-    this->map = &map;
+
+}
+
+void CUnit_AI::do_turn() {
+
 }
 
