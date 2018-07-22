@@ -120,7 +120,7 @@ bool CMap::move(int x, int y, int to_x, int to_y) {
 }
 
 int CMap::distance(int x, int y, int to_x, int to_y) {
-    return std::abs(x-to_x)+std::abs(y-to_y);
+    return std::max(std::abs(x-to_x),std::abs(y-to_y)); /// diagonal distance
 }
 std::unordered_map<int,CUnit*>* CMap::get_enemys_list() {
     return &this->enemy_list;

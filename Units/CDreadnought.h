@@ -19,7 +19,7 @@ private:
 public:
     CDreadnought(int typ, int x, int y, CMap &map);
     void do_turn() override;
-    void get_nearest();
+    int get_nearest();
 };
 
 
