@@ -10,3 +10,5 @@ CUnit_AI::CUnit_AI(int typ, int x, int y, CMap &map) : CUnit(typ, x, y, map) {
 
 }
 
+
+

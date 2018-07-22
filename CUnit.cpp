@@ -23,6 +23,10 @@ int CUnit::get_y() {
     return this->y;
 }
 
+int CUnit::get_health() {
+    return this->health;
+}
+
 bool CUnit::move(int to_x, int to_y) {
     if( this->map->move(this->x, this->y, to_x, to_y) ) {
         this->x = to_x;
@@ -32,4 +36,16 @@ bool CUnit::move(int to_x, int to_y) {
 
     return false;
 }
+
+bool CUnit::attack(int to_x, int to_y) {
+    CUnit* target_unit = this->map->get_unit(to_x,to_y);
+    if(target_unit) {
+        target_unit->health = target_unit->health - this->damage;
+        return true;
+    }
+    return false;
+}
+
+
+
 

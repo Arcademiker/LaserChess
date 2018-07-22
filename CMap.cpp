@@ -22,7 +22,7 @@ CMap::CMap() {
     unsigned int size = 8;
     this->unitCounter = 0;
     this->enemyCounter = 0;
-    this->grid = std::vector<std::vector<int>>(size,std::vector<int>(size,0));
+    this->grid = std::vector<std::vector<int>>(size, std::vector<int>(size, 0));
 }
 
 /// get unit id that occupated field at position (x,y) or 0 if free
@@ -31,13 +31,15 @@ int CMap::get(int x, int y) {
 }
 
 CUnit* CMap::get_unit(int x, int y) {
-    if(this->get(x,y) < 0) {
-        return this->enemy_list.at(this->get(x,y));
+    int id = this->get(x,y);
+    if(id != 0) {
+        return this->get_unit(id);
     }
     else {
-        return this->unit_list.at(this->get(x,y));
+        //todo: throw exception
+        void* empty = nullptr; // = new CGrunt(0,-1,-1,*this);
+        return static_cast<CUnit *>(empty);
     }
-
 }
 
 CUnit* CMap::get_unit(int id) {
@@ -149,13 +151,15 @@ void CMap::print() {
 
 void CMap::listAllUnits() {
     for ( auto& U: this->unit_list ) {
-        std::cout << "+" << U.first << ": " << U.second->get_type()
-                  << " - (x, y): (" << U.second->get_x() << ", " << U.second->get_y() << ")" << std::endl;
+        std::cout << "+" << U.first << ": type = " << U.second->get_type()
+                  << " - (x, y) = (" << U.second->get_x() << ", " << U.second->get_y() << ")"
+                  << " - hp = " << U.second->get_health() << std::endl;
     }
     std::cout << std::endl;
     for ( auto& U: this->enemy_list ) {
-        std::cout << U.first << ": " << U.second->get_type()
-                  << " - (x, y): (" << U.second->get_x() << ", " << U.second->get_y() << ")" << std::endl;
+        std::cout << U.first << ": type = " << U.second->get_type()
+                  << " - (x, y) = (" << U.second->get_x() << ", " << U.second->get_y() << ")"
+                  << " - hp = " << U.second->get_health() << std::endl;
     }
     std::cout << std::endl;
 }

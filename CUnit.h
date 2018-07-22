@@ -15,6 +15,7 @@ protected:
     CMap* map;
     int type;
     int health;
+    int damage;
     int x;
     int y;
 public:
@@ -22,7 +23,9 @@ public:
     int get_type();
     int get_x();
     int get_y();
+    int get_health();
     bool move(int to_x, int to_y);
+    bool attack(int to_x, int to_y);
     virtual void do_turn() = 0;
 };
 

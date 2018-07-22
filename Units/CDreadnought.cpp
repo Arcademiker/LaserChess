@@ -13,7 +13,8 @@ void CDreadnought::scanSurrounding() {
 }
 
 CDreadnought::CDreadnought(int typ, int x, int y, CMap &map) : CUnit_AI(typ, x, y, map) {
-
+    this->health = 5;
+    this->damage = 2;
 }
 
 void CDreadnought::do_turn() {
