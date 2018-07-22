@@ -13,7 +13,7 @@ private:
 
 public:
     CUnit_AI(int typ, int x, int y, CMap &map);
-    //void get_nearest();
+    bool attack(int to_x, int to_y) override;
     //void do_turn() override;
 };
 

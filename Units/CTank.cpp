@@ -5,8 +5,8 @@
 #include "CTank.h"
 
 CTank::CTank(int typ, int x, int y, CMap &map) : CUnit_Player(typ, x, y, map) {
-    this->health = 2;
-    this->damage = 4;
+    this->health = 4;
+    this->damage = 2;
 }
 
 void CTank::do_turn() {

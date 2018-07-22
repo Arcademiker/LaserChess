@@ -25,6 +25,10 @@ CMap::CMap() {
     this->grid = std::vector<std::vector<int>>(size, std::vector<int>(size, 0));
 }
 
+bool CMap::is_inbound(int x, int y) {
+    return y >= 0 && x >=0 && y < this->grid.size() && x < this->grid[0].size();
+}
+
 /// get unit id that occupated field at position (x,y) or 0 if free
 int CMap::get(int x, int y) {
     return this->grid[y][x];
@@ -32,13 +36,11 @@ int CMap::get(int x, int y) {
 
 CUnit* CMap::get_unit(int x, int y) {
     int id = this->get(x,y);
-    if(id != 0) {
+    if(id != 0 && is_inbound(x,y)) {
         return this->get_unit(id);
     }
     else {
-        //todo: throw exception
-        void* empty = nullptr; // = new CGrunt(0,-1,-1,*this);
-        return static_cast<CUnit *>(empty);
+        return nullptr;
     }
 }
 
@@ -46,8 +48,11 @@ CUnit* CMap::get_unit(int id) {
     if(id < 0) {
         return this->enemy_list.at(id);
     }
-    else {
+    else if(id > 0){
         return this->unit_list.at(id);
+    }
+    else {
+        return nullptr;
     }
 }
 
@@ -124,6 +129,7 @@ bool CMap::move(int x, int y, int to_x, int to_y) {
 int CMap::distance(int x, int y, int to_x, int to_y) {
     return std::max(std::abs(x-to_x),std::abs(y-to_y)); /// diagonal distance
 }
+
 std::unordered_map<int,CUnit*>* CMap::get_enemys_list() {
     return &this->enemy_list;
 }
@@ -163,6 +169,8 @@ void CMap::listAllUnits() {
     }
     std::cout << std::endl;
 }
+
+
 
 
 

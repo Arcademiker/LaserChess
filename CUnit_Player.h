@@ -10,6 +10,7 @@
 class CUnit_Player : public CUnit{
 public:
     CUnit_Player(int typ, int x, int y, CMap &map);
+    bool attack(int to_x, int to_y) override;
     //void do_turn() override; /// pure virtual
 };
 

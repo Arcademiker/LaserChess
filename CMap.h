@@ -34,6 +34,7 @@ public:
     bool kill_unit(int id);
     bool move(int x, int y, int to_x, int to_y);
     int distance(int x, int y, int to_x, int to_y);
+    bool is_inbound(int x, int y);
     std::unordered_map<int,CUnit*>* get_enemys_list();
     std::unordered_map<int,CUnit*>* get_unit_list();
     void print();

@@ -25,6 +25,12 @@ void CDreadnought::do_turn() {
     int x_dir = std::max(std::min(enemy->get_x()-this->x,1),-1); /// move -1,0 or 1 in x direction to minimize distance to enemy
     int y_dir = std::max(std::min(enemy->get_y()-this->y,1),-1); /// move -1,0 or 1 in y direction to minimize distance to enemy
     this->move(this->x+x_dir,this->y+y_dir);
+    /// attack:
+    for(int d_y = -1; d_y <= 1; ++d_y) {
+        for(int d_x = -1; d_x <= 1; ++d_x) {
+            this->attack(this->x+d_x,this->y+d_y);
+        }
+    }
 }
 
 

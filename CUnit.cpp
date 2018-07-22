@@ -37,14 +37,12 @@ bool CUnit::move(int to_x, int to_y) {
     return false;
 }
 
-bool CUnit::attack(int to_x, int to_y) {
-    CUnit* target_unit = this->map->get_unit(to_x,to_y);
-    if(target_unit) {
-        target_unit->health = target_unit->health - this->damage;
-        return true;
-    }
-    return false;
+bool CUnit::loose_health(int damage) {
+    this->health = this->health - damage;
+    return this->health < 1; /// Unit dies by the damage
 }
+
+
 
 
 

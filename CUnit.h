@@ -24,8 +24,9 @@ public:
     int get_x();
     int get_y();
     int get_health();
+    bool loose_health(int damage);
     bool move(int to_x, int to_y);
-    bool attack(int to_x, int to_y);
+    virtual bool attack(int to_x, int to_y) = 0;
     virtual void do_turn() = 0;
 };
 
