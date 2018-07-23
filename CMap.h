@@ -15,6 +15,7 @@
 class CUnit;
 class CMap {
 private:
+    unsigned int size = 8;
     std::vector<std::vector<int>> grid;
     std::unordered_map<int,CUnit*> unit_list;
     std::unordered_map<int,CUnit*> enemy_list;
@@ -26,6 +27,7 @@ private:
 
 public:
     CMap();
+    unsigned int get_size();
     int get(int x, int y);
     CUnit* get_unit(int x, int y);
     //todo: get enemy???

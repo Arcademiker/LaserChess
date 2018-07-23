@@ -5,7 +5,6 @@
 #include "CUnit_Player.h"
 
 CUnit_Player::CUnit_Player(int typ, int x, int y, CMap &map) : CUnit(typ, x, y, map) {
-
 }
 
 bool CUnit_Player::attack(int to_x, int to_y) {
@@ -23,4 +22,25 @@ bool CUnit_Player::attack(int target_id) {
     }
 
     return false; /// attack doesn't hit target
+}
+
+std::pair<int,int> CUnit_Player::user_input() {
+    ///replace with mouse input
+    int do_x = -1;
+    int do_y = -1;
+    while (do_x < 0 || do_x > 7 || do_y < 0 || do_y > 7) {
+        std::cin >> do_x;
+        if ( do_x == 9 ) {
+            do_x = this->x;
+            do_y = this->y;
+            break;
+        }
+        std::cin >> do_y;
+        if ( do_y == 9 ) {
+            do_x = this->x;
+            do_y = this->y;
+            break;
+        }
+    }
+    return std::make_pair(do_x,do_y);
 }

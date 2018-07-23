@@ -19,10 +19,9 @@ void CMap::set(int x, int y, int id) {
 }
 
 CMap::CMap() {
-    unsigned int size = 8;
     this->unitCounter = 0;
     this->enemyCounter = 0;
-    this->grid = std::vector<std::vector<int>>(size, std::vector<int>(size, 0));
+    this->grid = std::vector<std::vector<int>>(this->size, std::vector<int>(this->size, 0));
 }
 
 bool CMap::is_inbound(int x, int y) {
@@ -168,6 +167,10 @@ void CMap::listAllUnits() {
                   << " - hp = " << U.second->get_health() << std::endl;
     }
     std::cout << std::endl;
+}
+
+unsigned int CMap::get_size() {
+    return this->size;
 }
 
 
