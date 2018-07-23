@@ -42,6 +42,21 @@ bool CUnit::loose_health(int damage) {
     return this->health < 1; /// Unit dies by the damage
 }
 
+int CUnit::shot(int dir_x, int dir_y) {
+    int at_x = this->x+dir_x;
+    int at_y = this->y+dir_y;
+    int target_id;
+    while(this->map->is_inbound(at_x,at_y)) {
+        target_id = this->map->get(at_x,at_y);
+        if( target_id != 0 ) {
+            return target_id;
+        }
+        at_x = at_x+dir_x;
+        at_y = at_y+dir_y;
+    }
+    return 0;
+}
+
 
 
 

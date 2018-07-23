@@ -26,7 +26,9 @@ public:
     int get_health();
     bool loose_health(int damage);
     bool move(int to_x, int to_y);
+    int shot(int dir_x, int dir_y);
     virtual bool attack(int to_x, int to_y) = 0;
+    virtual bool attack(int target_id) = 0;
     virtual void do_turn() = 0;
 };
 

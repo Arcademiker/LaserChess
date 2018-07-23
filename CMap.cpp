@@ -36,7 +36,7 @@ int CMap::get(int x, int y) {
 
 CUnit* CMap::get_unit(int x, int y) {
     int id = this->get(x,y);
-    if(id != 0 && is_inbound(x,y)) {
+    if(id != 0) {
         return this->get_unit(id);
     }
     else {
@@ -60,35 +60,35 @@ CUnit* CMap::get_unit(int id) {
 /// buggy but user doesn't add units manually. cannot occur ingame if level is createtd properly
 void CMap::add_unit(int type, int x, int y) {
     switch(type) {
-        case 1 :
-            this->unitCounter++;
-            this->unit_list.insert({ this->unitCounter, new CGrunt(type, x, y, *this)});
-            this->grid[y][x] = unitCounter;
-            break;
-        case 2 :
-            this->unitCounter++;
-            this->unit_list.insert({ this->unitCounter, new CJumpship(type, x, y, *this)});
-            this->grid[y][x] = unitCounter;
-            break;
-        case 3 :
-            this->unitCounter++;
-            this->unit_list.insert({ this->unitCounter, new CTank(type, x, y, *this)});
-            this->grid[y][x] = unitCounter;
-            break;
-        case 4:
+        case 1:
             this->enemyCounter++;
             this->enemy_list.insert({ -this->enemyCounter, new CDrone(type, x, y, *this)});
             this->grid[y][x] = -enemyCounter;
             break;
-        case 5:
+        case 2:
             this->enemyCounter++;
             this->enemy_list.insert({ -this->enemyCounter, new CDreadnought(type, x, y, *this)});
             this->grid[y][x] = -enemyCounter;
             break;
-        case 6:
+        case 3:
             this->enemyCounter++;
             this->enemy_list.insert({ -this->enemyCounter, new CCommandUnit(type, x, y, *this)});
             this->grid[y][x] = -enemyCounter;
+            break;
+        case 4 :
+            this->unitCounter++;
+            this->unit_list.insert({ this->unitCounter, new CGrunt(type, x, y, *this)});
+            this->grid[y][x] = unitCounter;
+            break;
+        case 5 :
+            this->unitCounter++;
+            this->unit_list.insert({ this->unitCounter, new CJumpship(type, x, y, *this)});
+            this->grid[y][x] = unitCounter;
+            break;
+        case 6 :
+            this->unitCounter++;
+            this->unit_list.insert({ this->unitCounter, new CTank(type, x, y, *this)});
+            this->grid[y][x] = unitCounter;
             break;
         default:
             //todo: throw exception
