@@ -3,8 +3,8 @@
 
 int main() {
     CMap map;
-    map.add_unit(6,2,3);
-    map.add_unit(4,1,1);
+    map.add_unit(5,2,3);
+    map.add_unit(6,1,1);
     map.add_unit(1,2,6);
     map.add_unit(5,0,3);
     map.add_unit(2,3,3);

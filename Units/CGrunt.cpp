@@ -43,7 +43,7 @@ void CGrunt::do_turn() {
 
         do {
             do_point = this->user_input();
-        } while (!this->player_options[do_point.second][do_point.first] || (do_point.first == this->x && do_point.second == this->y));
+        } while (!this->player_options[do_point.second][do_point.first] && !(do_point.first == this->x && do_point.second == this->y));
 
         this->attack(do_point.first, do_point.second);
     }
