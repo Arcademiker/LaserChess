@@ -41,6 +41,35 @@ void CGrunt::calc_attack_area() {
     /// 0 1 1 1 1 1 0
     /// 1 1 1 0 1 1 1
     /// 1 1 0 0 0 1 1
+    this->attack_range.clear();
+    unsigned int size = this->map->get_size();
+    this->attack_range = std::vector<std::vector<bool>>(size, std::vector<bool>(size, false));
+    std::vector<std::pair<int,int>> dir;
+    dir.push_back(std::make_pair( 1, 1));
+    dir.push_back(std::make_pair(-1, 1));
+    dir.push_back(std::make_pair( 1,-1));
+    dir.push_back(std::make_pair(-1,-1));
+
+    for(int y = 0; y < size ; ++y) {
+        for(int x = 0; x < size ; ++x) {
+            if(this->player_options[y][x]) {
+                for(auto d : dir) {
+                    int at_x = y + d.first;
+                    int at_y = x + d.second;
+                    int target_id;
+                    while (this->map->is_inbound(at_x, at_y)) {
+                        this->attack_range[at_y][at_x] = true;
+                        target_id = this->map->get(at_x, at_y);
+                        if (target_id < 0) { /// player could move own units out of the line of fire
+                            break;
+                        }
+                        at_x = at_x + d.first;
+                        at_y = at_y + d.second;
+                    }
+                }
+            }
+        }
+    }
 }
 
 void CGrunt::do_turn() {

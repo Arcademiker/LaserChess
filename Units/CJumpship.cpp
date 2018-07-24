@@ -54,7 +54,10 @@ void CJumpship::calc_attack_area() {
     for(int y = 0; y < size ; ++y) {
         for(int x = 0; x < size ; ++x) {
             if(this->player_options[y][x]) {
-                // todo jumps
+                if(this->map->is_inbound(x,y+1)) {this->attack_range[y+1][x] = true;}
+                if(this->map->is_inbound(x+1,y)) {this->attack_range[y][x+1] = true;}
+                if(this->map->is_inbound(x,y-1)) {this->attack_range[y-1][x] = true;}
+                if(this->map->is_inbound(x+1,y)) {this->attack_range[y][x-1] = true;}
             }
         }
     }
