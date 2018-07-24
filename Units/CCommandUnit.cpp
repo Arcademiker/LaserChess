@@ -9,6 +9,17 @@ CCommandUnit::CCommandUnit(int typ, int x, int y, CMap &map) : CUnit_AI(typ, x, 
     this->damage = 0;
 }
 
-void CCommandUnit::do_turn() {
+void CCommandUnit::calc_move_area() {
 
 }
+
+void CCommandUnit::calc_attack_area() {
+
+}
+
+
+void CCommandUnit::do_turn() {
+    // todo: heighlight all attackable fields (use this for other units too).
+    // todo: add unit blocking evasion
+}
+

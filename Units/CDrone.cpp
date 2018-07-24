@@ -9,6 +9,15 @@ CDrone::CDrone(int typ, int x, int y, CMap &map) : CUnit_AI(typ, x, y, map) {
     this->damage = 1;
 }
 
+void CDrone::calc_move_area() {
+
+}
+
+void CDrone::calc_attack_area() {
+
+}
+
+
 void CDrone::do_turn() {
     ///move:
     this->move(this->x-1, this->y);
@@ -30,3 +39,4 @@ void CDrone::do_turn() {
         this->attack(target2_id);
     }
 }
+

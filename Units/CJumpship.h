@@ -10,7 +10,9 @@
 class CJumpship : public CUnit_Player {
 public:
     CJumpship(int typ, int x, int y, CMap &map);
-    void do_turn() override;
+    void calc_move_area() override;
+    void calc_attack_area() override;
+    void do_turn() override ;
 };
 
 

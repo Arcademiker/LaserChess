@@ -15,7 +15,6 @@ public:
     CUnit_AI(int typ, int x, int y, CMap &map);
     bool attack(int to_x, int to_y) override;
     bool attack(int target_id) override ;
-    //void do_turn() override;
 };
 
 

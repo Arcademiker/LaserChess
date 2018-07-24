@@ -13,11 +13,12 @@
 class CUnit_Player : public CUnit{
 protected:
     std::vector<std::vector<bool>> player_options;
+    std::vector<std::vector<bool>> attack_range;
 public:
     CUnit_Player(int typ, int x, int y, CMap &map);
     bool attack(int to_x, int to_y) override;
     bool attack(int target_id) override;
-    //void heighlight();
+    //std::vector<std::vector<bool>>* get_heighlight();
     std::pair<int,int> user_input();
 };
 

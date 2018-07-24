@@ -9,17 +9,44 @@ CGrunt::CGrunt(int typ, int x, int y, CMap &map) : CUnit_Player(typ, x, y, map) 
     this->damage = 1;
 }
 
-void CGrunt::do_turn() {
-    /// move
+void CGrunt::calc_move_area() {
     this->player_options.clear();
     unsigned int size = this->map->get_size();
     this->player_options = std::vector<std::vector<bool>>(size, std::vector<bool>(size, false));
+    /// generate move options:
+    /// 0 1 0
+    /// 1 1 1
+    /// 0 1 0
     this->player_options[this->y][this->x] = true;
-    this->player_options[std::min(this->y+1,7)][this->x] = true;
-    this->player_options[this->y][std::min(this->x+1,7)] = true;
-    this->player_options[std::max(this->y-1,0)][this->x] = true;
-    this->player_options[this->y][std::max(this->x-1,0)] = true;
-    // todo: highlight();
+    if (this->map->is_inbound(this->x, this->y+1) && this->map->get(this->x, this->y+1) == 0) {
+        this->player_options[this->y+1][this->x] = true;
+    }
+    if (this->map->is_inbound(this->x+1, this->y) && this->map->get(this->x+1, this->y) == 0) {
+        this->player_options[this->y][this->x+1] = true;
+    }
+    if (this->map->is_inbound(this->x, this->y-1) && this->map->get(this->x, this->y-1) == 0) {
+        this->player_options[this->y-1][this->x] = true;
+    }
+    if (this->map->is_inbound(this->x-1, this->y) && this->map->get(this->x-1, this->y) == 0) {
+        this->player_options[this->y][this->x-1] = true;
+    }
+}
+
+void CGrunt::calc_attack_area() {
+    /// genrate attack options:
+    /// 1 1 0 0 0 1 1
+    /// 1 1 1 0 1 1 1
+    /// 0 1 1 1 1 1 0
+    /// 0 0 1 X 1 0 0
+    /// 0 1 1 1 1 1 0
+    /// 1 1 1 0 1 1 1
+    /// 1 1 0 0 0 1 1
+}
+
+void CGrunt::do_turn() {
+    /// move
+    this->calc_move_area();
+
     std::pair<int,int> do_point;
     do {
         do_point = this->user_input();
@@ -30,6 +57,7 @@ void CGrunt::do_turn() {
     /// attack
     /// reset player options
     this->player_options.clear();
+    unsigned int size = this->map->get_size();
     this->player_options = std::vector<std::vector<bool>>(size, std::vector<bool>(size, false));
     CUnit* target1_unit=this->map->get_unit(this->shot(-1,-1));
     CUnit* target2_unit=this->map->get_unit(this->shot(-1,+1));
@@ -48,3 +76,5 @@ void CGrunt::do_turn() {
         this->attack(do_point.first, do_point.second);
     }
 }
+
+

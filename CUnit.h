@@ -29,6 +29,8 @@ public:
     int shot(int dir_x, int dir_y);
     virtual bool attack(int to_x, int to_y) = 0;
     virtual bool attack(int target_id) = 0;
+    virtual void calc_move_area() = 0;
+    virtual void calc_attack_area() = 0;
     virtual void do_turn() = 0;
 };
 

@@ -17,6 +17,14 @@ CDreadnought::CDreadnought(int typ, int x, int y, CMap &map) : CUnit_AI(typ, x, 
     this->damage = 2;
 }
 
+void CDreadnought::calc_move_area() {
+
+}
+
+void CDreadnought::calc_attack_area() {
+
+}
+
 void CDreadnought::do_turn() {
     /// move:
     /// smater AI if it avoids damage while closing in?
@@ -51,5 +59,7 @@ int CDreadnought::get_nearest() {
     }
     return nearest;
 }
+
+
 
 

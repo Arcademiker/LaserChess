@@ -9,21 +9,61 @@ CJumpship::CJumpship(int typ, int x, int y, CMap &map) : CUnit_Player(typ, x, y,
     this->damage = 2;
 }
 
-void CJumpship::do_turn() {
-    /// move
+void CJumpship::calc_move_area() {
     this->player_options.clear();
     unsigned int size = this->map->get_size();
     this->player_options = std::vector<std::vector<bool>>(size, std::vector<bool>(size, false));
+    /// generate move options:
+    /// 0 1 0 1 0
+    /// 1 0 0 0 1
+    /// 0 0 1 0 0
+    /// 1 0 0 0 1
+    /// 0 1 0 1 0
     this->player_options[this->y][this->x] = true;
-    this->player_options[std::min(this->y+2,7)][std::min(this->x+1,7)] = true;
-    this->player_options[std::min(this->y+1,7)][std::min(this->x+2,7)] = true;
-    this->player_options[std::min(this->y+2,7)][std::max(this->x-1,0)] = true;
-    this->player_options[std::min(this->y+1,7)][std::max(this->x-2,0)] = true;
-    this->player_options[std::max(this->y-2,0)][std::max(this->x-1,0)] = true;
-    this->player_options[std::max(this->y-1,0)][std::max(this->x-2,0)] = true;
-    this->player_options[std::max(this->y-2,0)][std::min(this->x+1,7)] = true;
-    this->player_options[std::max(this->y-1,0)][std::min(this->x+2,7)] = true;
-    // todo: highlight();
+    std::vector<std::pair<int,int>> dir;
+    dir.push_back(std::make_pair( 2, 1));
+    dir.push_back(std::make_pair( 1, 2));
+    dir.push_back(std::make_pair( 2,-1));
+    dir.push_back(std::make_pair( 1,-2));
+    dir.push_back(std::make_pair(-2,-1));
+    dir.push_back(std::make_pair(-1,-2));
+    dir.push_back(std::make_pair(-2, 1));
+    dir.push_back(std::make_pair(-1, 2));
+    for(auto d: dir) {
+        int d_x = d.first;
+        int d_y = d.second;
+        if (this->map->is_inbound(this->x+d_x, this->y+d_y) && this->map->get(this->x+d_x, this->y+d_y) == 0) {
+            this->player_options[this->y+d_y][this->x+d_x] = true;
+        }
+    }
+}
+
+void CJumpship::calc_attack_area() {
+    /// genrate attack options:
+    /// 0 0 1 0 1 0 0
+    /// 0 1 X 1 X 1 0
+    /// 1 X 1 1 1 X 1
+    /// 0 1 1 X 1 1 0
+    /// 1 X 1 1 1 X 1
+    /// 0 1 X 1 X 1 0
+    /// 0 0 1 0 1 0 0
+    this->attack_range.clear();
+    unsigned int size = this->map->get_size();
+    this->attack_range = std::vector<std::vector<bool>>(size, std::vector<bool>(size, false));
+
+    for(int y = 0; y < size ; ++y) {
+        for(int x = 0; x < size ; ++x) {
+            if(this->player_options[y][x]) {
+                // todo jumps
+            }
+        }
+    }
+}
+
+void CJumpship::do_turn() {
+    /// move
+    this->calc_move_area();
+
     std::pair<int,int> do_point;
     do {
         do_point = this->user_input();
@@ -38,3 +78,5 @@ void CJumpship::do_turn() {
     this->attack(this->x,this->y-1);
 
 }
+
+
