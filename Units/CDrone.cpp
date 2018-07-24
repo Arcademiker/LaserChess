@@ -18,9 +18,13 @@ void CDrone::calc_attack_area() {
 }
 
 
-void CDrone::do_turn() {
+void CDrone::do_move() {
     ///move:
     this->move(this->x-1, this->y);
+
+}
+
+void CDrone::do_attack() {
     ///attack:
     int target1_id = this->shot(-1,-1);
     int target2_id = this->shot(-1,-1);
@@ -39,4 +43,3 @@ void CDrone::do_turn() {
         this->attack(target2_id);
     }
 }
-

@@ -38,7 +38,7 @@ std::vector<std::vector<bool>> *CUnit_AI::get_player_optons() {
 }
 
 bool CUnit_AI::calc_attack_options() {
-    return false;
+    return true;
 }
 
 std::vector<std::vector<bool>> *CUnit_AI::get_attack_range() {

@@ -18,10 +18,12 @@ private:
 
 public:
     CDreadnought(int typ, int x, int y, CMap &map);
+    int get_nearest();
     void calc_move_area() override;
     void calc_attack_area() override;
-    void do_turn() override;
-    int get_nearest();
+    void do_move() override;
+    void do_attack() override;
+
 };
 
 

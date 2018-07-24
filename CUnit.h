@@ -35,7 +35,8 @@ public:
     virtual void calc_attack_area() = 0;
     virtual std::vector<std::vector<bool>>* get_player_optons() = 0;
     virtual std::vector<std::vector<bool>>* get_attack_range() = 0;
-    virtual void do_turn() = 0;
+    virtual void do_move() = 0;
+    virtual void do_attack() = 0;
 };
 
 

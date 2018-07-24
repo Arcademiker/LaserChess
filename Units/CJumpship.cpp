@@ -39,7 +39,7 @@ void CJumpship::calc_move_area() {
 }
 
 bool CJumpship::calc_attack_options() {
-
+    return true;
 }
 
 void CJumpship::calc_attack_area() {
@@ -67,9 +67,9 @@ void CJumpship::calc_attack_area() {
     }
 }
 
-void CJumpship::do_turn() {
+void CJumpship::do_move() {
     /// move
-    this->calc_move_area();
+    //this->calc_move_area();
 
     std::pair<int,int> do_point;
     do {
@@ -77,13 +77,13 @@ void CJumpship::do_turn() {
     } while (!this->player_options[do_point.second][do_point.first]);
 
     this->move(do_point.first,do_point.second);
+}
 
+void CJumpship::do_attack() {
     /// attack
     this->attack(this->x+1,this->y);
     this->attack(this->x,this->y+1);
     this->attack(this->x-1,this->y);
     this->attack(this->x,this->y-1);
-
 }
-
 

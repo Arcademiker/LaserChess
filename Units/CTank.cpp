@@ -107,8 +107,8 @@ void CTank::calc_attack_area() {
 }
 
 
-void CTank::do_turn() {
-    this->calc_move_area();
+void CTank::do_move() {
+    //this->calc_move_area();
 
     std::pair<int,int> do_point;
     do {
@@ -116,14 +116,17 @@ void CTank::do_turn() {
     } while (!this->player_options[do_point.second][do_point.first]);
 
     this->move(do_point.first,do_point.second);
+}
 
+void CTank::do_attack() {
     /// attack
-    if(this->calc_attack_options()) {
+    std::pair<int,int> do_point;
+    //if(this->calc_attack_options()) {
         do {
             do_point = this->user_input();
         } while (!this->player_options[do_point.second][do_point.first] && !(do_point.first == this->x && do_point.second == this->y));
 
         this->attack(do_point.first, do_point.second);
-    }
+    //}
 }
 

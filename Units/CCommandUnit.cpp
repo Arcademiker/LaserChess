@@ -18,13 +18,11 @@ void CCommandUnit::calc_attack_area() {
 }
 
 
-void CCommandUnit::do_turn() {
-    // todo: heighlight all attackable fields (use this for other units too).
-    // todo: add unit blocking evasion
+void CCommandUnit::do_move() {
     this->evasion_area.clear();
     this->evasion_area = std::vector<int>(3,0);
 
-    /// move command unit out of the way, because it cannot block shot for itself on another field
+    /// move command unit temporary out of the way, because it cannot block shot for itself on another field
     int tmp_x = this->x;
     int tmp_y = this->y;
     this->x = -1;
@@ -56,6 +54,10 @@ void CCommandUnit::do_turn() {
     else {
         this->move(this->x,this->y);
     }
+
+}
+
+void CCommandUnit::do_attack() {
 
 }
 
