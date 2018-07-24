@@ -27,6 +27,10 @@ int CUnit::get_health() {
     return this->health;
 }
 
+int CUnit::get_damage() {
+    return this->damage;
+}
+
 bool CUnit::move(int to_x, int to_y) {
     if( this->map->move(this->x, this->y, to_x, to_y) ) {
         this->x = to_x;
@@ -56,6 +60,8 @@ int CUnit::shot(int dir_x, int dir_y) {
     }
     return 0;
 }
+
+
 
 
 

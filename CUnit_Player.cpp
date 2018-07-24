@@ -50,3 +50,7 @@ std::pair<int,int> CUnit_Player::user_input() {
     }
     return std::make_pair(do_x,do_y);
 }
+
+std::vector<std::vector<bool>> *CUnit_Player::get_attack_range() {
+    return &this->attack_range;
+}

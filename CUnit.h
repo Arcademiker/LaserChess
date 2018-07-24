@@ -24,6 +24,7 @@ public:
     int get_x();
     int get_y();
     int get_health();
+    int get_damage();
     bool loose_health(int damage);
     bool move(int to_x, int to_y);
     int shot(int dir_x, int dir_y);
@@ -31,6 +32,7 @@ public:
     virtual bool attack(int target_id) = 0;
     virtual void calc_move_area() = 0;
     virtual void calc_attack_area() = 0;
+    virtual std::vector<std::vector<bool>>* get_attack_range() = 0;
     virtual void do_turn() = 0;
 };
 

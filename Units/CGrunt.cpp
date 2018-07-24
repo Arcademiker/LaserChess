@@ -54,8 +54,8 @@ void CGrunt::calc_attack_area() {
         for(int x = 0; x < size ; ++x) {
             if(this->player_options[y][x]) {
                 for(auto d : dir) {
-                    int at_x = y + d.first;
-                    int at_y = x + d.second;
+                    int at_x = x + d.first;
+                    int at_y = y + d.second;
                     int target_id;
                     while (this->map->is_inbound(at_x, at_y)) {
                         this->attack_range[at_y][at_x] = true;

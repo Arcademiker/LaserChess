@@ -34,7 +34,7 @@ void CTank::calc_move_area() {
     for(auto d: dir) {
         int d_x = d.first;
         int d_y = d.second;
-        int range = 1;
+        int range = 0;
         while(range < 3 && this->map->is_inbound(this->x+d_x,this->y+d_y) && this->map->get(this->x+d_x,this->y+d_y) == 0) {
             this->player_options[this->y+d_y][this->x+d_x] = true;
             d_x = d_x + d.first;
@@ -68,8 +68,8 @@ void CTank::calc_attack_area() {
         for(int x = 0; x < size ; ++x) {
             if(this->player_options[y][x]) {
                 for(auto d : dir) {
-                    int at_x = y + d.first;
-                    int at_y = x + d.second;
+                    int at_x = x + d.first;
+                    int at_y = y + d.second;
                     int target_id;
                     while (this->map->is_inbound(at_x, at_y)) {
                         this->attack_range[at_y][at_x] = true;

@@ -57,7 +57,7 @@ void CJumpship::calc_attack_area() {
                 if(this->map->is_inbound(x,y+1)) {this->attack_range[y+1][x] = true;}
                 if(this->map->is_inbound(x+1,y)) {this->attack_range[y][x+1] = true;}
                 if(this->map->is_inbound(x,y-1)) {this->attack_range[y-1][x] = true;}
-                if(this->map->is_inbound(x+1,y)) {this->attack_range[y][x-1] = true;}
+                if(this->map->is_inbound(x-1,y)) {this->attack_range[y][x-1] = true;}
             }
         }
     }

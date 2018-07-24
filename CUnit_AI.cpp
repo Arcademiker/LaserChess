@@ -33,3 +33,7 @@ bool CUnit_AI::attack(int target_id) {
     return false; /// attack doesn't hit target
 }
 
+std::vector<std::vector<bool>> *CUnit_AI::get_attack_range() {
+    return &this->attack_range;
+}
+
