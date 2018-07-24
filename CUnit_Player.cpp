@@ -8,8 +8,14 @@ CUnit_Player::CUnit_Player(int typ, int x, int y, CMap &map) : CUnit(typ, x, y, 
 }
 
 bool CUnit_Player::attack(int to_x, int to_y) {
-    int target_id = this->map->get(to_x,to_y);
-    this->attack(target_id);
+    if(this->map->is_inbound(to_x,to_y)) {
+        int target_id = this->map->get(to_x,to_y);
+        return this->attack(target_id);
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool CUnit_Player::attack(int target_id) {
