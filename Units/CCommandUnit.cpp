@@ -45,10 +45,12 @@ void CCommandUnit::do_turn() {
     this->x = tmp_x;
     this->y = tmp_y;
 
-    if(this->map->is_inbound(this->x,this->y-1) && this->evasion_area[0] < this->evasion_area[1] && this->evasion_area[0] < this->evasion_area[2]) {
+    if(this->map->is_inbound(this->x,this->y-1) && this->map->get(this->x,this->y-1) == 0
+       && this->evasion_area[0] < this->evasion_area[1] && this->evasion_area[0] < this->evasion_area[2]) {
         this->move(this->x,this->y-1);
     }
-    else if (this->map->is_inbound(this->x,this->y+1) && this->evasion_area[1] > this->evasion_area[2]) {
+    else if (this->map->is_inbound(this->x,this->y+1) && this->map->get(this->x,this->y+1)
+             && this->evasion_area[1] > this->evasion_area[2]) {
         this->move(this->x,this->y+1);
     }
     else {

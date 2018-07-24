@@ -38,6 +38,10 @@ void CJumpship::calc_move_area() {
     }
 }
 
+bool CJumpship::calc_attack_options() {
+
+}
+
 void CJumpship::calc_attack_area() {
     /// genrate attack options:
     /// 0 0 1 0 1 0 0

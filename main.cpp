@@ -34,6 +34,10 @@ int main() {
     map.get_unit(-1)->do_turn();
     map.print();
     map.listAllUnits();
+    map.get_unit(1)->do_turn();
+    map.get_unit(-1)->do_turn();
+    map.print();
+    map.listAllUnits();
     /*
     map.get_unit(2,3)->move(5,6);
     map.print();

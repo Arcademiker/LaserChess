@@ -44,6 +44,26 @@ void CTank::calc_move_area() {
     }
 }
 
+bool CTank::calc_attack_options() {
+    /// attack
+    /// reset player options
+    this->player_options.clear();
+    unsigned int size = this->map->get_size();
+    this->player_options = std::vector<std::vector<bool>>(size, std::vector<bool>(size, false));
+    CUnit* target1_unit=this->map->get_unit(this->shot( 0,-1));
+    CUnit* target2_unit=this->map->get_unit(this->shot(-1, 0));
+    CUnit* target3_unit=this->map->get_unit(this->shot( 0, 1));
+    CUnit* target4_unit=this->map->get_unit(this->shot( 1, 0));
+    if(target1_unit || target2_unit || target3_unit || target4_unit) {
+        if (target1_unit) { this->player_options[target1_unit->get_y()][target1_unit->get_x()] = true; }
+        if (target2_unit) { this->player_options[target2_unit->get_y()][target2_unit->get_x()] = true; }
+        if (target3_unit) { this->player_options[target3_unit->get_y()][target3_unit->get_x()] = true; }
+        if (target4_unit) { this->player_options[target4_unit->get_y()][target4_unit->get_x()] = true; }
+        return true;
+    }
+    return false;
+}
+
 void CTank::calc_attack_area() {
     /// genrate attack options:
     /// 0 0 0  7  0 0 0
@@ -98,20 +118,7 @@ void CTank::do_turn() {
     this->move(do_point.first,do_point.second);
 
     /// attack
-    /// reset player options
-    this->player_options.clear();
-    unsigned int size = this->map->get_size();
-    this->player_options = std::vector<std::vector<bool>>(size, std::vector<bool>(size, false));
-    CUnit* target1_unit=this->map->get_unit(this->shot(-1,0));
-    CUnit* target2_unit=this->map->get_unit(this->shot(0,-1));
-    CUnit* target3_unit=this->map->get_unit(this->shot(+1,0));
-    CUnit* target4_unit=this->map->get_unit(this->shot(0,+1));
-    if(target1_unit || target2_unit || target3_unit || target4_unit) {
-        if (target1_unit) { this->player_options[target1_unit->get_y()][target1_unit->get_x()] = true; }
-        if (target2_unit) { this->player_options[target2_unit->get_y()][target2_unit->get_x()] = true; }
-        if (target3_unit) { this->player_options[target3_unit->get_y()][target3_unit->get_x()] = true; }
-        if (target4_unit) { this->player_options[target4_unit->get_y()][target4_unit->get_x()] = true; }
-
+    if(this->calc_attack_options()) {
         do {
             do_point = this->user_input();
         } while (!this->player_options[do_point.second][do_point.first] && !(do_point.first == this->x && do_point.second == this->y));

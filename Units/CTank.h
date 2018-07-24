@@ -11,6 +11,7 @@ class CTank : public CUnit_Player {
 public:
     CTank(int typ, int x, int y, CMap &map);
     void calc_move_area() override;
+    bool calc_attack_options() override;
     void calc_attack_area() override;
     void do_turn() override;
 };

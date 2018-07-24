@@ -30,6 +30,14 @@ bool CUnit_Player::attack(int target_id) {
     return false; /// attack doesn't hit target
 }
 
+std::vector<std::vector<bool>> *CUnit_Player::get_attack_range() {
+    return &this->attack_range;
+}
+
+std::vector<std::vector<bool>> *CUnit_Player::get_player_optons() {
+    return &this->player_options;
+}
+
 std::pair<int,int> CUnit_Player::user_input() {
     ///replace with mouse input
     int do_x = -1;
@@ -51,6 +59,4 @@ std::pair<int,int> CUnit_Player::user_input() {
     return std::make_pair(do_x,do_y);
 }
 
-std::vector<std::vector<bool>> *CUnit_Player::get_attack_range() {
-    return &this->attack_range;
-}
+
