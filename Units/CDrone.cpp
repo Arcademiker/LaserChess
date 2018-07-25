@@ -34,16 +34,20 @@ void CDrone::do_attack() {
     int target2_id = this->shot(-1,-1);
     if(target1_id && target2_id) { /// both shots would hit a target. Hit the most valuable
         if(this->map->get_unit(target1_id)->get_type() > this->map->get_unit(target2_id)->get_type()) {
-            this->attack(target1_id);
+            if(this->map->get_unit(target1_id)->get_type() > 3) {
+                this->attack(target1_id);
+            }
         }
         else {
-            this->attack(target2_id);
+            if(this->map->get_unit(target1_id)->get_type() > 3) {
+                this->attack(target2_id);
+            }
         }
     }
-    else if(target1_id) {
+    else if(target1_id && this->map->get_unit(target1_id)->get_type() > 3) {
         this->attack(target1_id);
     }
-    else if(target2_id) {
+    else if(target2_id && this->map->get_unit(target1_id)->get_type() > 3) {
         this->attack(target2_id);
     }
 }

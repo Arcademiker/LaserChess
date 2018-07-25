@@ -42,14 +42,14 @@ bool CGrunt::calc_attack_options() {
     CUnit* target2_unit=this->map->get_unit(this->shot(-1, 1));
     CUnit* target3_unit=this->map->get_unit(this->shot( 1,-1));
     CUnit* target4_unit=this->map->get_unit(this->shot( 1, 1));
+    bool hit = false;
     if(target1_unit || target2_unit || target3_unit || target4_unit) {
-        if (target1_unit) { this->player_options[target1_unit->get_y()][target1_unit->get_x()] = true; }
-        if (target2_unit) { this->player_options[target2_unit->get_y()][target2_unit->get_x()] = true; }
-        if (target3_unit) { this->player_options[target3_unit->get_y()][target3_unit->get_x()] = true; }
-        if (target4_unit) { this->player_options[target4_unit->get_y()][target4_unit->get_x()] = true; }
-        return true;
+        if (target1_unit && target1_unit->get_type() < 4) { this->player_options[target1_unit->get_y()][target1_unit->get_x()] = true; hit = true;}
+        if (target2_unit && target2_unit->get_type() < 4) { this->player_options[target2_unit->get_y()][target2_unit->get_x()] = true; hit = true;}
+        if (target3_unit && target3_unit->get_type() < 4) { this->player_options[target3_unit->get_y()][target3_unit->get_x()] = true; hit = true;}
+        if (target4_unit && target4_unit->get_type() < 4) { this->player_options[target4_unit->get_y()][target4_unit->get_x()] = true; hit = true;}
     }
-    return false;
+    return hit;
 }
 
 void CGrunt::calc_attack_area() {
