@@ -21,13 +21,16 @@ private:
     std::unordered_map<int,CUnit*> enemy_list;
     unsigned int unitCounter;
     unsigned int enemyCounter;
+    int commandU_counter;
 
     //helper funktions:
     void set(int x, int y, int id);
 
 public:
     CMap();
+    ~CMap();
     unsigned int get_size();
+    int get_commandU_counter();
     int get(int x, int y);
     CUnit* get_unit(int x, int y);
     //todo: get enemy???

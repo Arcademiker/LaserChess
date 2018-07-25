@@ -21,11 +21,26 @@ void CMap::set(int x, int y, int id) {
 CMap::CMap() {
     this->unitCounter = 0;
     this->enemyCounter = 0;
+    this->commandU_counter = 0;
     this->grid = std::vector<std::vector<int>>(this->size, std::vector<int>(this->size, 0));
 }
 
+CMap::~CMap() {
+    unit_list.clear();
+    enemy_list.clear();
+}
+
+
 bool CMap::is_inbound(int x, int y) {
     return y >= 0 && x >=0 && y < this->grid.size() && x < this->grid[0].size();
+}
+
+unsigned int CMap::get_size() {
+    return this->size;
+}
+
+int CMap::get_commandU_counter() {
+    return this->commandU_counter;
 }
 
 /// get unit id that occupated field at position (x,y) or 0 if free
@@ -73,6 +88,7 @@ void CMap::add_unit(int type, int x, int y) {
             this->enemyCounter++;
             this->enemy_list.insert({ -this->enemyCounter, new CCommandUnit(type, x, y, *this)});
             this->grid[y][x] = -enemyCounter;
+            this->commandU_counter++;
             break;
         case 4 :
             this->unitCounter++;
@@ -98,6 +114,9 @@ void CMap::add_unit(int type, int x, int y) {
 bool CMap::kill_unit(int id) {
     std::unordered_map<int,CUnit*>* pList;
     if(id<0) {
+        if(this->get_unit(id)->get_type()==3) {
+            this->commandU_counter--;
+        }
         pList = &enemy_list;
     }
     else {
@@ -137,7 +156,9 @@ std::unordered_map<int,CUnit*>* CMap::get_unit_list() {
 }
 
 void CMap::print() {
+    std::cout << "   0 1 2 3 4 5 6 7" << std::endl << std::endl;
     for(int y = 0; y < this->grid.size(); ++y) {
+        std::cout << y << " ";
         for(int x = 0; x < this->grid[0].size(); ++x) {
             if(this->get(x,y) < 0) {
                 std::cout << this->get(x,y);
@@ -169,9 +190,7 @@ void CMap::listAllUnits() {
     std::cout << std::endl;
 }
 
-unsigned int CMap::get_size() {
-    return this->size;
-}
+
 
 
 

@@ -19,9 +19,13 @@ void CDrone::calc_attack_area() {
 
 
 void CDrone::do_move() {
-    ///move:
-    this->move(this->x-1, this->y);
-
+    if(this->x == 0) {
+        this->map->get_unit_list()->clear();
+    }
+    else {
+        ///move:
+        this->move(this->x-1, this->y);
+    }
 }
 
 void CDrone::do_attack() {
