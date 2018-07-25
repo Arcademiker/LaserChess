@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include <map>
 
 #include "CUnit.h"
 
@@ -33,7 +34,6 @@ public:
     int get_commandU_counter();
     int get(int x, int y);
     CUnit* get_unit(int x, int y);
-    //todo: get enemy???
     CUnit* get_unit(int id);
     void add_unit(int type, int x, int y);
     bool kill_unit(int id);
@@ -43,6 +43,7 @@ public:
     std::unordered_map<int,CUnit*>* get_enemys_list();
     std::unordered_map<int,CUnit*>* get_unit_list();
     void print();
+    void print(std::map<int,CUnit*>* UMap);
     void listAllUnits();
 };
 

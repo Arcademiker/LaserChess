@@ -1,50 +1,75 @@
 #include <iostream>
+#include <map>
+
 #include "CMap.h"
 
 CMap* generate_map(int level);
-void gameloop(CMap* map);
+bool gameloop(CMap* map);
 void print_options(CUnit* unit, CMap* map);
+int user_input(std::map<int,CUnit*>* UMap);
 
 int main() {
-    for(int Level = 1; Level <= 3; ++Level) {
+    for(int Level = 2; Level <= 3; ++Level) {
         CMap* map = generate_map(Level);
         std::cout << std::endl << "++++++++++++++++++  LEVEL " << Level << "  ++++++++++++++++++" << std::endl;
-        gameloop(map);
+        if(!gameloop(map)) {
+            Level--;
+        }
         delete map;
     }
     return 0;
 }
 
-void gameloop(CMap* map) {
+bool gameloop(CMap* map) {
     int round = 0;
     while (true) { //todo: escape key
         map->listAllUnits();
         std::cout << std::endl << "******************  ROUND " << round << "  ******************" << std::endl << std::endl;
+        auto* UMap = new std::map<int,CUnit*>;
         for(auto& U: *map->get_unit_list()) {
-            map->print();
-            U.second->calc_move_area();
-            print_options(U.second,map);
-            U.second->do_move();
-            if(U.second->calc_attack_options()) {
-                print_options(U.second,map);
-                U.second->do_attack();
-            }
+            UMap->insert(U);
         }
+        int id;
+        CUnit* U;
+        while(!UMap->empty()) {
+            map->print(UMap);
+            id = user_input(UMap);
+            if(id == 0) {
+                id = UMap->begin()->first;
+                U = UMap->begin()->second;
+            } else {
+                U = UMap->at(id);
+            }
+            U->calc_move_area();
+            print_options(U,map);
+            U->do_move();
+            if(U->calc_attack_options()) {
+                print_options(U,map);
+                U->do_attack();
+            }
+            UMap->erase(id);
+        }
+        delete UMap;
         map->print();
         if(map->get_enemys_list()->empty() || map->get_commandU_counter() <= 0) {
             map->listAllUnits();
             std::cout << std::endl << "!PLAYER WINS!" << std::endl;
-            break;
+            return true;
         }
+        auto* EMap = new std::multimap<int,CUnit*>;
         for(auto& E: *map->get_enemys_list()) {
+            EMap->insert({E.second->get_type(),E.second});
+        }
+        for(auto& E: *EMap) {
             E.second->do_move();
             E.second->do_attack();
         }
+        delete EMap;
         map->print();
         if(map->get_unit_list()->empty()) {
             map->listAllUnits();
             std::cout << std::endl << "!AI WINS!" << std::endl;
-            break;
+            return false;
         }
         round++;
     }
@@ -63,6 +88,8 @@ CMap* generate_map(int level) {
             map->add_unit(6,0,2);
             map->add_unit(6,0,5);
 
+            map->add_unit(1,7,0);
+            map->add_unit(1,7,7);
             map->add_unit(1,6,1);
             map->add_unit(1,6,6);
             map->add_unit(1,5,2);
@@ -83,19 +110,23 @@ CMap* generate_map(int level) {
             map->add_unit(6,0,4);
             map->add_unit(6,0,6);
 
-            map->add_unit(1,6,0);
-            map->add_unit(1,6,1);
-            map->add_unit(1,6,2);
-            map->add_unit(1,6,4);
-            map->add_unit(1,6,5);
-            map->add_unit(1,6,6);
-            map->add_unit(1,6,7);
-            map->add_unit(2,6,3);
+            map->add_unit(1,5,0);
+            map->add_unit(1,5,1);
+            map->add_unit(1,5,2);
+            map->add_unit(1,5,4);
+            map->add_unit(1,5,5);
+            map->add_unit(1,5,6);
+            map->add_unit(1,5,7);
             map->add_unit(3,5,3);
-            map->add_unit(3,7,2);
-            map->add_unit(3,7,4);
-            map->add_unit(3,7,0);
-            map->add_unit(3,7,6);
+            map->add_unit(2,4,3);
+            map->add_unit(2,7,0);
+            map->add_unit(2,7,1);
+            map->add_unit(2,7,2);
+            map->add_unit(2,7,3);
+            map->add_unit(2,7,4);
+            map->add_unit(2,7,5);
+            map->add_unit(2,7,6);
+            map->add_unit(2,7,7);
 
             break;
         case 3:
@@ -164,6 +195,19 @@ void print_options(CUnit* unit, CMap* map) {
     }
 }
 
+int user_input(std::map<int,CUnit*>* UMap) {
+    ///replace with mouse input
+    int id = -1;
+    while (id != 0 ) {
+        std::cin >> id;
+        for(auto& U: *UMap) {
+            if(id == U.first) {
+                return id;
+            }
+        }
+    }
+    return id;
+}
 
 
 

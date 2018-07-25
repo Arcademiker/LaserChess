@@ -175,6 +175,29 @@ void CMap::print() {
     std::cout << std::endl;
 }
 
+void CMap::print(std::map<int,CUnit*>* UMap) {
+    std::cout << "   0 1 2 3 4 5 6 7" << std::endl << std::endl;
+    for(int y = 0; y < this->grid.size(); ++y) {
+        std::cout << y << " ";
+        for(int x = 0; x < this->grid[0].size(); ++x) {
+            if(this->get(x,y) < 0) {
+                std::cout << this->get(x,y);
+            }
+            else if(this->get(x,y) != 0 && UMap->count(this->get(x,y)) != 0) {
+                std::cout << "+" << this->get(x,y);
+            }
+            else if(this->get(x,y) != 0) {
+                std::cout << "!" << this->get(x,y);
+            }
+            else {
+                std::cout << " 0";
+            }
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
 void CMap::listAllUnits() {
     for ( auto& U: this->unit_list ) {
         std::cout << "+" << U.first << ": type = " << U.second->get_type()
