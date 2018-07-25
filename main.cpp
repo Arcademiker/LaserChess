@@ -9,7 +9,7 @@ void print_options(CUnit* unit, CMap* map);
 int user_input(std::map<int,CUnit*>* UMap);
 
 int main() {
-    for(int Level = 2; Level <= 3; ++Level) {
+    for(int Level = 1; Level <= 3; ++Level) {
         CMap* map = generate_map(Level);
         std::cout << std::endl << "++++++++++++++++++  LEVEL " << Level << "  ++++++++++++++++++" << std::endl;
         if(!gameloop(map)) {
